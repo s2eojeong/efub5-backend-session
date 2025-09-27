@@ -56,6 +56,10 @@ public class Account {
         this.bio = bio;
     }
 
+    public void updateNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     public void changeStatus(AccountStatus status) {
         this.status = status;
     }

@@ -53,4 +53,16 @@ public class AccountController {
         accountService.physicalDeleteAccount(accountId);
         return ResponseEntity.ok("message : 성공적으로 탈퇴되었습니다.");
     }
+
+    @GetMapping("/redis/{accountId}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public String getEmailByIdFromRedis(@PathVariable Long accountId){
+        return accountService.findEmailByIdFromRedis(accountId);
+    }
+
+    @GetMapping("/mongodb/{accountId}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public String getNicknameByIdFromMongoDB(@PathVariable Long accountId){
+        return accountService.findNicknameByIdFromMongo(accountId);
+    }
 }
