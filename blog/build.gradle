@@ -37,13 +37,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	// Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    // H2 DB
-    testRuntimeOnly 'com.h2database:h2'
-	//oauth2
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-	//jwt
-	implementation 'io.jsonwebtoken:jjwt:0.12.6'
-	implementation 'javax.xml.bind:jaxb-api:2.3.1'
+	// H2 DB
+	testRuntimeOnly 'com.h2database:h2'
 }
 
 tasks.named('test') {

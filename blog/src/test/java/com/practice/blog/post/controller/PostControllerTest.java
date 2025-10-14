@@ -1,13 +1,16 @@
 package com.practice.blog.post.controller;
 
+import com.practice.blog.account.dto.response.AccountResponseDto;
 import com.practice.blog.account.entity.Account;
 import com.practice.blog.account.repository.AccountsRepository;
 import com.practice.blog.post.domain.Post;
 import com.practice.blog.post.repository.PostRepository;
+import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;

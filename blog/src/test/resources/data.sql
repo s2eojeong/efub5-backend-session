@@ -1,3 +1,5 @@
+SET autocommit = 1;
+
 CREATE TABLE IF NOT EXISTS accounts (
     account_id BIGINT NOT NULL AUTO_INCREMENT,
     email VARCHAR(60) NOT NULL UNIQUE,

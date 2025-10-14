@@ -60,10 +60,10 @@ class PostServiceTest {
         Post post = new Post("제목", "내용", account);
         post.setId(10L);
 
+        // when
         when(postRepository.findById(10L)).thenReturn(Optional.of(post));
         when(accountService.findByAccountId(1L)).thenReturn(account);
 
-        // doThrow: void 메서드 delete(...)가 호출되면 예외 발생
         doThrow(new IllegalArgumentException("삭제 실패"))
                 .when(postRepository).delete(any(Post.class));
 
@@ -77,14 +77,16 @@ class PostServiceTest {
     @Test
     void findByAccountId_2번째호출_RuntimeException() {
         // given
-        Account a1 = new Account("efub1@example.com", "testpw1", "efub1"); a1.setAccountId(1L);
-        Account a2 = new Account("efub2@example.com", "testpw2", "efub2"); a2.setAccountId(2L);
+        Account a1 = new Account("efub1@example.com", "testpw1", "efub1");
+        a1.setAccountId(1L);
+        Account a2 = new Account("efub2@example.com", "testpw2", "efub2");
+        a2.setAccountId(2L);
 
         // any()로 파라미터 매칭 + thenReturn → thenThrow → thenReturn
         when(accountService.findByAccountId(any()))
-                .thenReturn(a1)                               // 첫 번째 호출
-                .thenThrow(new RuntimeException("두 번째 실패")) // 두 번째 호출
-                .thenReturn(a2);                              // 세 번째 호출
+                .thenReturn(a1)
+                .thenThrow(new RuntimeException("두 번째 실패"))
+                .thenReturn(a2);
 
         PostService postService = new PostService(postRepository, accountService);
 
@@ -106,20 +108,19 @@ class PostServiceTest {
         // given
         Account writer = new Account("efub@example.com", "testpw", "efub");
         Post post = new Post("제목", "내용", writer);
-        post.setId(5L);
+        post.setId(1L);
 
-        when(postRepository.findById(5L)).thenReturn(Optional.of(post));
+        when(postRepository.findById(1L)).thenReturn(Optional.of(post));
 
         PostService postService = new PostService(postRepository, accountService);
 
         // when
-        PostResponse res = postService.getPost(5L);
+        PostResponse res = postService.getPost(1L);
 
         // then
         assertNotNull(res);
-        verify(postRepository).increaseViewCount(5L);    // 정확히 한 번 호출됐는지
-        verify(postRepository, times(1)).findById(5L);   // 호출 횟수까지 검증
-        verifyNoMoreInteractions(postRepository);        // 그 외 상호작용 없음
+        verify(postRepository).increaseViewCount(1L);
+        verify(postRepository, times(1)).findById(1L);
+        verifyNoMoreInteractions(postRepository);
     }
-
 }
